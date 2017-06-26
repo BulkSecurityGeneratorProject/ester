@@ -1,0 +1,34 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "contact",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "7"
+        }
+    ],
+    "changelogDate": "20170626200652",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "library",
+    "pagination": "infinite-scroll"
+}

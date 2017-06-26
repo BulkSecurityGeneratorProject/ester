@@ -1,0 +1,60 @@
+<div>
+    <h2>
+        <span jhiTranslate="esterApp.library.home.title">Libraries</span>
+        <button class="btn btn-primary float-right create-library" [routerLink]="['/', { outlets: { popup: ['library-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="esterApp.library.home.createLabel">
+            Create new Library
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="libraries">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="esterApp.library.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="address"><span jhiTranslate="esterApp.library.address">Address</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="contact"><span jhiTranslate="esterApp.library.contact">Contact</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let library of libraries ;trackBy: trackId">
+                <td><a [routerLink]="['../library', library.id ]">{{library.id}}</a></td>
+                <td>{{library.name}}</td>
+                <td>{{library.address}}</td>
+                <td>{{library.contact}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../library', library.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'library/'+ library.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'library/'+ library.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

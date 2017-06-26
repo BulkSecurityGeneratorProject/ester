@@ -1,0 +1,75 @@
+<div>
+    <h2>
+        <span jhiTranslate="esterApp.book.home.title">Books</span>
+        <button class="btn btn-primary float-right create-book" [routerLink]="['/', { outlets: { popup: ['book-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="esterApp.book.home.createLabel">
+            Create new Book
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="books">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="isbn"><span jhiTranslate="esterApp.book.isbn">Isbn</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="esterApp.book.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="author"><span jhiTranslate="esterApp.book.author">Author</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="year"><span jhiTranslate="esterApp.book.year">Year</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="cover"><span jhiTranslate="esterApp.book.cover">Cover</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="active"><span jhiTranslate="esterApp.book.active">Active</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="userLogin"><span jhiTranslate="esterApp.book.user">User</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let book of books ;trackBy: trackId">
+                <td><a [routerLink]="['../book', book.id ]">{{book.id}}</a></td>
+                <td>{{book.isbn}}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.year}}</td>
+                <td>
+                    <a *ngIf="book.cover" (click)="openFile(book.coverContentType, book.cover)">
+                        <img [src]="'data:' + book.coverContentType + ';base64,' + book.cover" style="max-height: 30px;" alt="book image"/>
+                    </a>
+                    <span *ngIf="book.cover">{{book.coverContentType}}, {{byteSize(book.cover)}}</span>
+                </td>
+                <td>{{book.active}}</td>
+                <td>
+                    {{book.userLogin}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../book', book.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'book/'+ book.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'book/'+ book.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+
+<div *ngIf="library">
+    <h2><span jhiTranslate="esterApp.library.detail.title">Library</span> {{library.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="esterApp.library.name">Name</span></dt>
+        <dd>
+            <span>{{library.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="esterApp.library.address">Address</span></dt>
+        <dd>
+            <span>{{library.address}}</span>
+        </dd>
+        <dt><span jhiTranslate="esterApp.library.contact">Contact</span></dt>
+        <dd>
+            <span>{{library.contact}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'library/'+ library.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

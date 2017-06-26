@@ -1,0 +1,23 @@
+{
+    "esterApp": {
+        "library" : {
+            "home": {
+                "title": "Libraries",
+                "createLabel": "Создать новый Library",
+                "createOrEditLabel": "Создать или отредактировать Library"
+            },
+            "created": "Новый Library создан с идентификатором {{ param }}",
+            "updated": "Library обновлен с идентификатором {{ param }}",
+            "deleted": "Library удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Library {{ id }}?"
+            },
+            "detail": {
+                "title": "Library"
+            },
+            "name": "Name",
+            "address": "Address",
+            "contact": "Contact"
+        }
+    }
+}

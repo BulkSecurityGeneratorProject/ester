@@ -1,0 +1,11 @@
+version: '2'
+services:
+    ester-postgresql:
+        image: postgres:9.6.2
+        # volumes:
+        #     - ~/volumes/jhipster/ester/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=ester
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

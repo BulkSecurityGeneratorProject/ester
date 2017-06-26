@@ -1,0 +1,23 @@
+{
+    "esterApp": {
+        "library" : {
+            "home": {
+                "title": "Libraries",
+                "createLabel": "Lisa uus Library",
+                "createOrEditLabel": "Lisa või muuda Library"
+            },
+            "created": "Uus Library on loodud identifikaatoriga {{ param }}",
+            "updated": "Library identifikaatoriga {{ param }} on muudetud",
+            "deleted": "Library identifikaatoriga {{ param }} on kustutatud",
+            "delete": {
+                "question": "Kas olete kindel, et soovite kustutada Library {{ id }}?"
+            },
+            "detail": {
+                "title": "Library"
+            },
+            "name": "Name",
+            "address": "Address",
+            "contact": "Contact"
+        }
+    }
+}

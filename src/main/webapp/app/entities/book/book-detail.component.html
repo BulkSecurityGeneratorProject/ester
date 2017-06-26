@@ -1,0 +1,60 @@
+
+<div *ngIf="book">
+    <h2><span jhiTranslate="esterApp.book.detail.title">Book</span> {{book.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="esterApp.book.isbn">Isbn</span></dt>
+        <dd>
+            <span>{{book.isbn}}</span>
+        </dd>
+        <dt><span jhiTranslate="esterApp.book.name">Name</span></dt>
+        <dd>
+            <span>{{book.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="esterApp.book.author">Author</span></dt>
+        <dd>
+            <span>{{book.author}}</span>
+        </dd>
+        <dt><span jhiTranslate="esterApp.book.year">Year</span></dt>
+        <dd>
+            <span>{{book.year}}</span>
+        </dd>
+        <dt><span jhiTranslate="esterApp.book.cover">Cover</span></dt>
+        <dd>
+            <div *ngIf="book.cover">
+                <a (click)="openFile(book.coverContentType, book.cover)">
+                    <img [src]="'data:' + book.coverContentType + ';base64,' + book.cover" style="max-width: 100%;" alt="book image"/>
+                </a>
+                {{book.coverContentType}}, {{byteSize(book.cover)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="esterApp.book.active">Active</span></dt>
+        <dd>
+            <span>{{book.active}}</span>
+        </dd>
+        <dt><span jhiTranslate="esterApp.book.user">User</span></dt>
+        <dd>
+            {{book.userLogin}}
+        </dd>
+        <dt><span jhiTranslate="esterApp.book.library">Library</span></dt>
+        <dd>
+            <span *ngFor="let library of book.libraries; let last = last">
+                <a [routerLink]="['/library', library?.id ]">{{library.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'book/'+ book.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

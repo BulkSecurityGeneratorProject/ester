@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "ee.tenman.ester",
+      "nativeLanguage": "et"
+    },
+    "jhipsterVersion": "4.5.6",
+    "baseName": "ester",
+    "packageName": "ee.tenman.ester",
+    "packageFolder": "ee/tenman/ester",
+    "serverPort": "80",
+    "authenticationType": "jwt",
+    "hibernateCache": "infinispan",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSocialSignIn": true,
+    "jwtSecretKey": "397ea45f28ee1fb39bf4d2c531b0051694caa2db",
+    "clientFramework": "angular2",
+    "useSass": true,
+    "clientPackageManager": "yarn",
+    "applicationType": "monolith",
+    "testFrameworks": [
+      "protractor"
+    ],
+    "jhiPrefix": "jhi",
+    "enableTranslation": true,
+    "nativeLanguage": "et",
+    "languages": [
+      "et",
+      "ru",
+      "en"
+    ]
+  }
+}

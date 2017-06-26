@@ -1,0 +1,86 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myBookLabel" jhiTranslate="esterApp.book.home.createOrEditLabel">Create or edit a Book</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!book.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="book.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="esterApp.book.isbn" for="field_isbn">Isbn</label>
+            <input type="text" class="form-control" name="isbn" id="field_isbn"
+                [(ngModel)]="book.isbn" required />
+            <div [hidden]="!(editForm.controls.isbn?.dirty && editForm.controls.isbn?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.isbn?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="esterApp.book.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="book.name"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="esterApp.book.author" for="field_author">Author</label>
+            <input type="text" class="form-control" name="author" id="field_author"
+                [(ngModel)]="book.author"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="esterApp.book.year" for="field_year">Year</label>
+            <input type="number" class="form-control" name="year" id="field_year"
+                [(ngModel)]="book.year"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="esterApp.book.cover" for="field_cover">Cover</label>
+            <div>
+                <img [src]="'data:' + book.coverContentType + ';base64,' + book.cover" style="max-height: 100px;" *ngIf="book.cover" alt="book image"/>
+                <div *ngIf="book.cover" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{book.coverContentType}}, {{byteSize(book.cover)}}</span>
+                    <button type="button" (click)="clearInputImage('cover', 'coverContentType', 'fileImage')" class="btn btn-default btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="fileImage" (change)="setFileData($event, book, 'cover', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+            </div>
+            <input type="hidden" class="form-control" name="cover" id="field_cover"
+                [(ngModel)]="book.cover"  />
+            <input type="hidden" class="form-control" name="coverContentType" id="field_coverContentType"
+                [(ngModel)]="book.coverContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="esterApp.book.active" for="field_active">Active</label>
+            <input type="checkbox" class="form-control" name="active" id="field_active"
+                [(ngModel)]="book.active"  />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="esterApp.book.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="book.userId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="esterApp.book.library" for="field_library">Library</label>
+            <select class="form-control" id="field_library" multiple name="library" [(ngModel)]="book.libraries">
+                <option [ngValue]="getSelected(book.libraries, libraryOption)" *ngFor="let libraryOption of libraries; trackBy: trackLibraryById">{{libraryOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

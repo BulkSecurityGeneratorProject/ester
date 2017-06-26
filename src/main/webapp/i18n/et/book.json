@@ -1,0 +1,28 @@
+{
+    "esterApp": {
+        "book" : {
+            "home": {
+                "title": "Books",
+                "createLabel": "Lisa uus Book",
+                "createOrEditLabel": "Lisa või muuda Book"
+            },
+            "created": "Uus Book on loodud identifikaatoriga {{ param }}",
+            "updated": "Book identifikaatoriga {{ param }} on muudetud",
+            "deleted": "Book identifikaatoriga {{ param }} on kustutatud",
+            "delete": {
+                "question": "Kas olete kindel, et soovite kustutada Book {{ id }}?"
+            },
+            "detail": {
+                "title": "Book"
+            },
+            "isbn": "Isbn",
+            "name": "Name",
+            "author": "Author",
+            "year": "Year",
+            "cover": "Cover",
+            "active": "Active",
+            "user": "User",
+            "library": "Library"
+        }
+    }
+}
