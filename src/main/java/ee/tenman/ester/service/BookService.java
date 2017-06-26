@@ -52,8 +52,7 @@ public class BookService {
     @Transactional(readOnly = true)
     public Page<BookDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Books");
-        return bookRepository.findAll(pageable)
-            .map(bookMapper::toDto);
+        return bookRepository.findAllByUserIsCurrentUser(pageable).map(bookMapper::toDto);
     }
 
     /**
