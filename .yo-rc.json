@@ -8,7 +8,7 @@
     "baseName": "ester",
     "packageName": "ee.tenman.ester",
     "packageFolder": "ee/tenman/ester",
-    "serverPort": "80",
+    "serverPort": "8080",
     "authenticationType": "jwt",
     "hibernateCache": "infinispan",
     "clusteredHttpSession": false,
