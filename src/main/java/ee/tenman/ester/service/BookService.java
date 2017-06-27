@@ -2,6 +2,7 @@ package ee.tenman.ester.service;
 
 import ee.tenman.ester.domain.Book;
 import ee.tenman.ester.repository.BookRepository;
+import ee.tenman.ester.repository.UserRepository;
 import ee.tenman.ester.service.dto.BookDTO;
 import ee.tenman.ester.service.mapper.BookMapper;
 import org.slf4j.Logger;
@@ -10,6 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.inject.Inject;
+
+import static ee.tenman.ester.security.SecurityUtils.getCurrentUserLogin;
 
 
 /**
@@ -25,6 +30,9 @@ public class BookService {
 
     private final BookMapper bookMapper;
 
+    @Inject
+    private UserRepository userRepository;
+
     public BookService(BookRepository bookRepository, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
@@ -39,6 +47,7 @@ public class BookService {
     public BookDTO save(BookDTO bookDTO) {
         log.debug("Request to save Book : {}", bookDTO);
         Book book = bookMapper.toEntity(bookDTO);
+        book.setUser(userRepository.findOneByLogin(getCurrentUserLogin()).get());
         book = bookRepository.save(book);
         return bookMapper.toDto(book);
     }
